@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neville AI - Copilot Chat Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Animated Background -->
+        <div class="animated-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon animate-float">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0066cc;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="50" cy="50" r="45" fill="url(#logoGradient)" opacity="0.1"/>
+                            <circle cx="50" cy="50" r="35" fill="none" stroke="url(#logoGradient)" stroke-width="2"/>
+                            <path d="M 35 50 Q 50 35 65 50" fill="none" stroke="url(#logoGradient)" stroke-width="2"/>
+                            <circle cx="50" cy="50" r="8" fill="url(#logoGradient)"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Neville AI</h1>
+                        <p class="tagline">Intelligent Conversations</p>
+                    </div>
+                </div>
+                
+                <div class="header-controls">
+                    <button class="btn-settings" title="Settings">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"/>
+                        </svg>
+                    </button>
+                    <button class="btn-new-chat" title="New Chat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Chat Section -->
+        <main class="chat-section">
+            <!-- Welcome Screen (Hidden after first message) -->
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-content">
+                    <div class="welcome-icon animate-bounce">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="welcomeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0066cc;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="50" cy="50" r="45" fill="url(#welcomeGradient)" opacity="0.2"/>
+                            <path d="M 30 40 Q 50 55 70 40" fill="none" stroke="url(#welcomeGradient)" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="40" cy="35" r="3" fill="url(#welcomeGradient)"/>
+                            <circle cx="60" cy="35" r="3" fill="url(#welcomeGradient)"/>
+                        </svg>
+                    </div>
+                    <h2>Welcome to Neville AI</h2>
+                    <p>Your intelligent conversation partner powered by advanced AI technology</p>
+                    <div class="suggestions">
+                        <button class="suggestion-btn" onclick="sendMessage('Explain quantum computing in simple terms')">
+                            📚 Explain quantum computing
+                        </button>
+                        <button class="suggestion-btn" onclick="sendMessage('Help me plan a week-long road trip')">
+                            🗺️ Plan a road trip
+                        </button>
+                        <button class="suggestion-btn" onclick="sendMessage('What are the latest AI trends?')">
+                            🚀 AI trends
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages Container -->
+            <div class="messages-container" id="messagesContainer">
+                <div class="messages" id="messages"></div>
+            </div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="footer">
+            <div class="input-section">
+                <form class="chat-form" id="chatForm">
+                    <div class="input-wrapper">
+                        <textarea 
+                            class="chat-input" 
+                            id="chatInput" 
+                            placeholder="Ask me anything... (Shift + Enter for new line, Ctrl/Cmd + Enter to send)"
+                            rows="1"
+                            autocomplete="off"
+                        ></textarea>
+                        <button type="submit" class="btn-send" id="btnSend" disabled>
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.16584257 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.837654326,3.0486314 1.15159189,3.99701575 L3.03521743,10.4380088 C3.03521743,10.5950566 3.34915502,10.7521992 3.50612381,10.7521992 L16.6915026,11.5377052 C16.6915026,11.5377052 17.1624089,11.5377052 17.1624089,12.0089974 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="disclaimer">💡 Neville AI can make mistakes. Always verify important information.</p>
+                </form>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
